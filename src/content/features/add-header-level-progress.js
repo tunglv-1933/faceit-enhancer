@@ -28,6 +28,7 @@ export default async () => {
   if (hasFeatureAttribute(FEATURE_ATTRIBUTE, headerRightElement)) {
     return
   }
+
   setFeatureAttribute(FEATURE_ATTRIBUTE, headerRightElement)
 
   let levelElement
@@ -75,7 +76,7 @@ export default async () => {
             <a
               className="text-sm text-muted bold"
               style={{ 'align-self': 'flex-end' }}
-              onClick={async e => {
+              onClick={async (e) => {
                 e.preventDefault()
                 const selectGameElementSelector =
                   'div[ng-click="vm.openGameSelectorModal()"'

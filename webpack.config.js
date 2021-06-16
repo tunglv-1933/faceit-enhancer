@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
@@ -24,10 +24,15 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['react'],
-            plugins: [
-              'transform-class-properties',
-              'transform-object-rest-spread'
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  useBuiltIns: 'usage',
+                  corejs: 3
+                }
+              ],
+              '@babel/preset-react'
             ]
           }
         }
@@ -38,10 +43,16 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            plugins: [
-              'transform-object-rest-spread',
+            presets: [
               [
-                'transform-react-jsx',
+                '@babel/preset-env',
+                {
+                  useBuiltIns: 'usage',
+                  corejs: 3
+                }
+              ],
+              [
+                '@babel/preset-react',
                 {
                   pragma: 'h',
                   useBuiltIns: true
@@ -58,7 +69,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(),
     new CopyWebpackPlugin(['*']),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)

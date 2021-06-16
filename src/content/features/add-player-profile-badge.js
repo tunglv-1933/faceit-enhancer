@@ -14,13 +14,13 @@ import { getPlayer } from '../helpers/faceit-api'
 
 const FEATURE_ATTRIBUTE = 'profile-badge'
 
-export default async parentElement => {
+export default async (parentElement) => {
   const badgeElement = select(
     'div.page-title__content > div.page-title__content__title',
     parentElement
   )
 
-  if (badgeElement === null) {
+  if (!badgeElement) {
     return
   }
 
@@ -38,9 +38,8 @@ export default async parentElement => {
     return
   }
 
-  const featuredPlayerBadgeElement = createFeaturedPlayerBadgeElement(
-    playerBadge
-  )
+  const featuredPlayerBadgeElement =
+    createFeaturedPlayerBadgeElement(playerBadge)
 
   const badgeWrapper = <div className="mb-sm">{featuredPlayerBadgeElement}</div>
 

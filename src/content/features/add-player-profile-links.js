@@ -12,10 +12,10 @@ import { validateSocialLink, getPlatformFromTab } from '../helpers/social-media'
 
 const FEATURE_ATTRIBUTE = 'profile-links'
 
-export default async parentElement => {
+export default async (parentElement) => {
   const socialTabsElement = select('div.social-tabs > ul.nav', parentElement)
 
-  if (socialTabsElement === null) {
+  if (!socialTabsElement) {
     return
   }
 
@@ -38,12 +38,13 @@ export default async parentElement => {
 
   const invalidLinks = Object.keys(profile.socials)
     .filter(
-      platform =>
+      (platform) =>
         profile.socials[platform].value &&
         profile.socials[platform].value !== ''
     )
     .filter(
-      platform => !validateSocialLink(platform, profile.socials[platform].value)
+      (platform) =>
+        !validateSocialLink(platform, profile.socials[platform].value)
     )
 
   if (invalidLinks.length === 0) {
@@ -53,7 +54,7 @@ export default async parentElement => {
   for (const socialElement of socialTabsElement.children) {
     const platform = getPlatformFromTab(socialElement.getAttribute('ng-class'))
 
-    if (platform === null) {
+    if (!platform) {
       continue
     }
 
