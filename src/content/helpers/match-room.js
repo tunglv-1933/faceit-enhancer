@@ -7,10 +7,11 @@ import { getCurrentPath } from './location'
 export const FACTION_1 = 'faction1'
 export const FACTION_2 = 'faction2'
 
-export const getRoomId = path => {
-  const match = /room\/([0-9a-z]+-[0-9a-z]+-[0-9a-z]+-[0-9a-z]+-[0-9a-z]+(?:-[0-9a-z]+)?)/.exec(
-    path || getCurrentPath()
-  )
+export const getRoomId = (path) => {
+  const match =
+    /room\/([0-9a-z]+-[0-9a-z]+-[0-9a-z]+-[0-9a-z]+-[0-9a-z]+(?:-[0-9a-z]+)?)/.exec(
+      path || getCurrentPath()
+    )
 
   return match && match[1]
 }
@@ -23,7 +24,7 @@ export const matchRoomIsReady = () =>
   select.exists(`${MATCH_TEAM_V1}${MEMBERS_ATTRIBUTE}`) ||
   select.exists(`${MATCH_TEAM_V2}${MEMBERS_ATTRIBUTE}`)
 
-export const getTeamElements = parent => {
+export const getTeamElements = (parent) => {
   let teamElements = select.all(MATCH_TEAM_V1, parent)
   let isTeamV1Element = true
 
@@ -57,9 +58,9 @@ export const getFactionDetails = (element, isTeamV1Element = true) => {
   }
 }
 
-export const getIsFaction1 = factionName => factionName.includes('faction1')
+export const getIsFaction1 = (factionName) => factionName.includes('faction1')
 
-export const getTeamMemberElements = parent =>
+export const getTeamMemberElements = (parent) =>
   select.all('.match-team-member', parent)
 
 export const getNicknameElement = (parent, isTeamV1Element) =>
@@ -72,7 +73,7 @@ export const getNicknameElement = (parent, isTeamV1Element) =>
     parent
   )
 
-export const getFactionIsPremadeV1 = factionType => factionType === 'premade'
+export const getFactionIsPremadeV1 = (factionType) => factionType === 'premade'
 
 const COLOR_PALETTE = ['#0082c8', '#ffe119', '#808080', '#3cb44b', '#e6194b']
 
@@ -109,7 +110,7 @@ export function mapPlayersToPartyColors(
             ({ activeTeamId }) => activeTeamId === curr.activeTeamId
           )
         } else {
-          const playerPartyId = partiesIds.find(partyId => {
+          const playerPartyId = partiesIds.find((partyId) => {
             const party = parties[partyId]
             return party.indexOf(curr.id) !== -1
           })
@@ -151,7 +152,7 @@ export const mapPlayersToPartyColorsMemoized = mem(mapPlayersToPartyColors, {
   }
 })
 
-const mapMatchNicknamesToPlayers = match => {
+const mapMatchNicknamesToPlayers = (match) => {
   const nicknamesToPlayers = {}
   let allPlayers
   if (match.faction1 && match.faction2) {
@@ -164,7 +165,7 @@ const mapMatchNicknamesToPlayers = match => {
     )
   }
 
-  allPlayers.forEach(player => {
+  allPlayers.forEach((player) => {
     const { nickname } = player
     nicknamesToPlayers[nickname] = player
   })
@@ -175,11 +176,11 @@ const mapMatchNicknamesToPlayers = match => {
 export const mapMatchNicknamesToPlayersMemoized = mem(
   mapMatchNicknamesToPlayers,
   {
-    cacheKey: match => JSON.stringify(match.guid || match.id)
+    cacheKey: (match) => JSON.stringify(match.guid || match.id)
   }
 )
 
-export const getMatchState = element => {
+export const getMatchState = (element) => {
   const matchStateElement = select('matchroom-versus-status h5', element)
 
   if (!matchStateElement) {

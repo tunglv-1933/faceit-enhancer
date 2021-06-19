@@ -10,7 +10,7 @@ const FEATURE_ATTRIBUTE = 'connect-to-server'
 
 const DELAY = 10000
 
-export default async parent => {
+export default async (parent) => {
   const goToServerElement = select('a[translate-once="GO-TO-SERVER"]', parent)
 
   if (!goToServerElement) {
@@ -40,7 +40,8 @@ export default async parent => {
 
   notifyIf('notifyMatchRoomAutoConnectToServer', {
     title: 'Connecting to Server',
-    message: `Launching the game and connecting to the server in ${DELAY /
-      1000} seconds.`
+    message: `Launching the game and connecting to the server in ${
+      DELAY / 1000
+    } seconds.`
   })
 }

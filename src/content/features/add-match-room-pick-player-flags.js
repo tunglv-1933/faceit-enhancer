@@ -9,7 +9,7 @@ import createFlagElement from '../components/flag'
 
 const FEATURE_ATTRIBUTE = 'pick-player-flag'
 
-export default async parentElement => {
+export default async (parentElement) => {
   const { isTeamV1Element } = getTeamElements(parentElement)
 
   if (isTeamV1Element) {
@@ -30,7 +30,7 @@ export default async parentElement => {
     captainPickElement
   )
 
-  playerPickElements.forEach(async playerPickElement => {
+  playerPickElements.forEach(async (playerPickElement) => {
     if (hasFeatureAttribute(FEATURE_ATTRIBUTE, playerPickElement)) {
       return
     }

@@ -16,7 +16,7 @@ import createHrElement from '../components/hr'
 
 const FEATURE_ATTRIBUTE = 'extended-stats'
 
-export default async parentElement => {
+export default async (parentElement) => {
   const profileElement = select('section.profile > div.profile', parentElement)
 
   if (
@@ -39,12 +39,8 @@ export default async parentElement => {
     return
   }
 
-  const {
-    averageKills,
-    averageHeadshots,
-    averageKDRatio,
-    averageKRRatio
-  } = playerStats
+  const { averageKills, averageHeadshots, averageKDRatio, averageKRRatio } =
+    playerStats
 
   const statsElement = (
     <section>

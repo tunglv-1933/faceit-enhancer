@@ -28,7 +28,7 @@ import storage from '../../shared/storage'
 
 const FEATURE_ATTRIBUTE = 'elo-estimation'
 
-export default async parent => {
+export default async (parent) => {
   const { teamElements, isTeamV1Element } = getTeamElements(parent)
 
   const roomId = getRoomId()
@@ -49,7 +49,7 @@ export default async parent => {
   }
 
   let factions = await Promise.all(
-    teamElements.map(async teamElement => {
+    teamElements.map(async (teamElement) => {
       const factionDetails = getFactionDetails(teamElement, isTeamV1Element)
 
       if (!factionDetails) {
@@ -67,7 +67,7 @@ export default async parent => {
         const memberElements = getTeamMemberElements(teamElement)
 
         let memberElos = await Promise.all(
-          memberElements.map(async memberElement => {
+          memberElements.map(async (memberElement) => {
             const nicknameElement = getNicknameElement(
               memberElement,
               isTeamV1Element
@@ -100,7 +100,7 @@ export default async parent => {
           })
         )
 
-        memberElos = memberElos.filter(m => Boolean(m))
+        memberElos = memberElos.filter((m) => Boolean(m))
 
         const totalElo = memberElos.reduce((acc, curr) => acc + curr, 0)
         averageElo = Math.floor(totalElo / memberElos.length)
@@ -113,7 +113,7 @@ export default async parent => {
     })
   )
 
-  factions = factions.filter(faction => Boolean(faction))
+  factions = factions.filter((faction) => Boolean(faction))
 
   if (factions.length !== 2) {
     return
@@ -198,7 +198,7 @@ export default async parent => {
     return eloElement
   })
 
-  eloElements = eloElements.filter(eloElement => Boolean(eloElement))
+  eloElements = eloElements.filter((eloElement) => Boolean(eloElement))
 
   if (eloElements.length !== 2) {
     return
@@ -214,7 +214,7 @@ export default async parent => {
     const result = firstResultElement.textContent
 
     if (result === 'W' || result === 'L') {
-      eloElements.forEach(eloElement => {
+      eloElements.forEach((eloElement) => {
         eloElement.remove()
       })
       observer.disconnect()

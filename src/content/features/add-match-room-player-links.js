@@ -21,7 +21,7 @@ import { validateSocialLink } from '../helpers/social-media'
 
 const FEATURE_ATTRIBUTE = 'player-links'
 
-export default async parent => {
+export default async (parent) => {
   const { teamElements, isTeamV1Element } = getTeamElements(parent)
 
   const roomId = getRoomId()
@@ -35,10 +35,10 @@ export default async parent => {
 
   const nicknamesToPlayers = mapMatchNicknamesToPlayersMemoized(match)
 
-  teamElements.forEach(async teamElement => {
+  teamElements.forEach(async (teamElement) => {
     const memberElements = getTeamMemberElements(teamElement)
 
-    memberElements.forEach(async memberElement => {
+    memberElements.forEach(async (memberElement) => {
       if (hasFeatureAttribute(FEATURE_ATTRIBUTE, memberElement)) {
         return
       }
@@ -73,13 +73,13 @@ export default async parent => {
 
       const socialLinks = Object.keys(user.socials || {})
         .filter(
-          platform =>
+          (platform) =>
             user.socials[platform].value && user.socials[platform].value !== ''
         )
-        .filter(platform =>
+        .filter((platform) =>
           validateSocialLink(platform, user.socials[platform].value)
         )
-        .map(platform => ({
+        .map((platform) => ({
           url: user.socials[platform].value,
           platform
         }))

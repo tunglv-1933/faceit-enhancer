@@ -11,7 +11,7 @@ import { getEloChangesByMatches } from '../helpers/elo'
 
 const FEATURE_ATTRIBUTE = 'elo-self-result'
 
-export default async parent => {
+export default async (parent) => {
   const matchStateElement = select('matchroom-versus-status', parent)
   const matchState = getMatchState(parent)
 
@@ -30,7 +30,7 @@ export default async parent => {
   const matches = await getPlayerMatches(self.guid, game)
   const roomId = getRoomId()
 
-  if (!matches.some(match => match.matchId === roomId)) {
+  if (!matches.some((match) => match.matchId === roomId)) {
     return
   }
 
@@ -50,7 +50,7 @@ export default async parent => {
 
   const matchResultElements = select.all('div[class*=sc-cnIlNO]')
 
-  matchResultElements.forEach(matchResultElement => {
+  matchResultElements.forEach((matchResultElement) => {
     const result = matchResultElement.textContent
 
     const eloElement = (

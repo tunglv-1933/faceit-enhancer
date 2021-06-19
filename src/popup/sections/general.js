@@ -23,7 +23,7 @@ export default ({ getSwitchProps, getMenuProps }) => (
     <ListItemMenu
       primary="Update Notification"
       options={UPDATE_NOTIFICATION_TYPES}
-      mapOption={option => UPDATE_NOTIFICATION_TYPES_MAP[option]}
+      mapOption={(option) => UPDATE_NOTIFICATION_TYPES_MAP[option]}
       {...getMenuProps('updateNotificationType')}
     />
   </React.Fragment>

@@ -9,13 +9,13 @@ import {
 
 const FEATURE_ATTRIBUTE = 'player-controls-report-fix'
 
-export default async parent => {
+export default async (parent) => {
   const { teamElements } = getTeamElements(parent)
 
-  teamElements.forEach(async teamElement => {
+  teamElements.forEach(async (teamElement) => {
     const memberElements = getTeamMemberElements(teamElement)
 
-    memberElements.forEach(async memberElement => {
+    memberElements.forEach(async (memberElement) => {
       if (hasFeatureAttribute(FEATURE_ATTRIBUTE, memberElement)) {
         return
       }

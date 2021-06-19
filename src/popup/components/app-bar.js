@@ -13,7 +13,7 @@ export default class extends React.Component {
 
   onCloseMenu = () => this.setState({ anchorEl: null })
 
-  onClickNotificationUpdates = event =>
+  onClickNotificationUpdates = (event) =>
     this.setState({ anchorEl: event.currentTarget })
 
   render() {
@@ -45,7 +45,7 @@ export default class extends React.Component {
                 open={Boolean(anchorEl)}
                 onClose={this.onCloseMenu}
               >
-                {updateNotifications.map(version => (
+                {updateNotifications.map((version) => (
                   <MenuItem
                     key={version}
                     onClick={() => onClickUpdateNotification(version)}

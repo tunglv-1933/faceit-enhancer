@@ -8,11 +8,9 @@ import {
 } from '../helpers/dom-element'
 import { isLoggedIn } from '../helpers/user'
 
-const FEATURE_ATTRIBUTE = Math.random()
-  .toString(36)
-  .substr(2, 9)
+const FEATURE_ATTRIBUTE = Math.random().toString(36).substr(2, 9)
 
-export default async bannedUser => {
+export default async (bannedUser) => {
   const observer = new MutationObserver(() => {
     if (bannedUser.shadow || !isLoggedIn()) {
       return

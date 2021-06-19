@@ -53,7 +53,7 @@ const skillLevelElement = ({
   )
 }
 
-export default async parentElement => {
+export default async (parentElement) => {
   const profileElement = select('section.profile > div.profile', parentElement)
 
   if (

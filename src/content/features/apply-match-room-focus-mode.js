@@ -13,7 +13,7 @@ import {
 
 const FEATURE_ATTRIBUTE = 'focus-mode'
 
-export default async parent => {
+export default async (parent) => {
   const matchState = getMatchState(parent)
 
   if (!['VOTING', 'CONFIGURING', 'READY', 'ONGOING'].includes(matchState)) {
@@ -31,7 +31,7 @@ export default async parent => {
   const isSelfInLobby = [
     ...teams.faction1.roster,
     ...teams.faction2.roster
-  ].some(player => player.id === self.guid)
+  ].some((player) => player.id === self.guid)
 
   if (!isSelfInLobby) {
     return
@@ -49,7 +49,7 @@ export default async parent => {
 
   const teamElements = select.all('match-team-v2', parent)
 
-  teamElements.forEach(teamElement => {
+  teamElements.forEach((teamElement) => {
     if (hasFeatureAttribute(FEATURE_ATTRIBUTE, teamElement)) {
       return
     }

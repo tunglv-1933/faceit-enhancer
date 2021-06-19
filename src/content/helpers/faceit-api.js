@@ -23,7 +23,7 @@ async function fetchApi(path) {
 
     const response = await pRetry(
       () =>
-        fetch(`${BASE_URL}${path}`, options).then(res => {
+        fetch(`${BASE_URL}${path}`, options).then((res) => {
           if (res.status === 404) {
             throw new pRetry.AbortError(res.statusText)
           } else if (!res.ok) {
@@ -59,9 +59,9 @@ const fetchApiMemoized = pMemoize(fetchApi, {
   maxAge: CACHE_TIME
 })
 
-export const getUser = userId => fetchApiMemoized(`/core/v1/users/${userId}`)
+export const getUser = (userId) => fetchApiMemoized(`/core/v1/users/${userId}`)
 
-export const getPlayer = nickname =>
+export const getPlayer = (nickname) =>
   fetchApiMemoized(`/core/v1/nicknames/${nickname}`)
 
 export const getPlayerMatches = (userId, game, size = 21, page = 0) =>
@@ -92,7 +92,7 @@ export const getPlayerStats = async (userId, game, size = 20) => {
     return null
   }
 
-  averageStats = averageStats.filter(stats => stats.gameMode.includes('5v5'))
+  averageStats = averageStats.filter((stats) => stats.gameMode.includes('5v5'))
 
   if (averageStats.length <= 1) {
     return null
@@ -106,10 +106,10 @@ export const getPlayerStats = async (userId, game, size = 20) => {
   }
 }
 
-export const getQuickMatch = matchId =>
+export const getQuickMatch = (matchId) =>
   fetchApiMemoized(`/core/v1/matches/${matchId}?withStats=true`)
 
-export const getMatch = matchId =>
+export const getMatch = (matchId) =>
   fetchApiMemoized(`/match/v2/match/${matchId}`)
 
 export const getSelf = () => fetchApiMemoized('/core/v1/sessions/me')
@@ -121,7 +121,7 @@ export const getQuickMatchPlayers = async (game, region, matchType) =>
     )
   ).total
 
-export const getHubQueue = async id =>
+export const getHubQueue = async (id) =>
   (await fetchApi(`/queue/v1/queue/hub/${id}`))[0]
 
 export const getPlayerHistory = async (userId, page = 0) => {
@@ -137,5 +137,5 @@ export const getPlayerHistory = async (userId, page = 0) => {
   )
 }
 
-export const getMatchmakingQueue = queueId =>
+export const getMatchmakingQueue = (queueId) =>
   fetchApiMemoized(`/queue/v1/queue/matchmaking/${queueId}`)

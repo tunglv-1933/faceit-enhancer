@@ -3,7 +3,7 @@ import test from 'ava'
 import { h } from 'dom-chef'
 import * as modals from '../src/content/helpers/modals'
 
-test('isInviteToParty', t => {
+test('isInviteToParty', (t) => {
   t.true(
     modals.isInviteToParty(
       <div>
@@ -15,7 +15,7 @@ test('isInviteToParty', t => {
   t.false(modals.isInviteToParty(<div />))
 })
 
-test('isMatchQueuing', t => {
+test('isMatchQueuing', (t) => {
   t.true(
     modals.isMatchQueuing(
       <div>
@@ -27,7 +27,7 @@ test('isMatchQueuing', t => {
   t.false(modals.isMatchQueuing(<div />))
 })
 
-test('isMatchReady', t => {
+test('isMatchReady', (t) => {
   t.true(
     modals.isMatchReady(
       <div>

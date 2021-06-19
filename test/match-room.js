@@ -1,7 +1,7 @@
 import test from 'ava'
 import * as matchRoom from '../src/content/helpers/match-room'
 
-test('getRoomId', t => {
+test('getRoomId', (t) => {
   const roomId = '466ece1d-9f16-4b64-aa2d-826c60bc022f'
   const path = `en/csgo/room/${roomId}`
 
@@ -9,7 +9,7 @@ test('getRoomId', t => {
   t.falsy(matchRoom.getRoomId(''))
 })
 
-test('mapPlayersToPartyColorsV1', t => {
+test('mapPlayersToPartyColorsV1', (t) => {
   const createPlayer = (nickname, activeTeamId) => ({
     nickname,
     activeTeamId
@@ -33,7 +33,7 @@ test('mapPlayersToPartyColorsV1', t => {
   )
 })
 
-test('mapPlayersToPartyColorsV2', t => {
+test('mapPlayersToPartyColorsV2', (t) => {
   let playerIdCounter = 0
   const parties = {}
   const createPlayer = (nickname, partyId) => {

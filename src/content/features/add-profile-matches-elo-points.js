@@ -15,7 +15,7 @@ import { getIsFreeMember } from '../helpers/membership'
 
 const FEATURE_ATTRIBUTE = 'elo-points'
 
-export default async parentElement => {
+export default async (parentElement) => {
   const matchHistoryElement = select(
     'div.js-match-history-stats',
     parentElement

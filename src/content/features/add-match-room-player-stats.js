@@ -16,7 +16,7 @@ import createPlayerStatsElement from '../components/player-stats'
 
 const FEATURE_ATTRIBUTE = 'player-stats'
 
-export default async parent => {
+export default async (parent) => {
   const { teamElements, isTeamV1Element } = getTeamElements(parent)
 
   const roomId = getRoomId()
@@ -32,7 +32,7 @@ export default async parent => {
 
   const nicknamesToPlayers = mapMatchNicknamesToPlayersMemoized(match)
 
-  teamElements.forEach(async teamElement => {
+  teamElements.forEach(async (teamElement) => {
     const factionDetails = getFactionDetails(teamElement, isTeamV1Element)
 
     if (!factionDetails) {
@@ -43,7 +43,7 @@ export default async parent => {
 
     const memberElements = getTeamMemberElements(teamElement)
 
-    memberElements.forEach(async memberElement => {
+    memberElements.forEach(async (memberElement) => {
       if (hasFeatureAttribute(FEATURE_ATTRIBUTE, memberElement)) {
         return
       }

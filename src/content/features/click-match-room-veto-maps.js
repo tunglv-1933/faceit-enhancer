@@ -25,7 +25,7 @@ const maps = {
 }
 /* eslint-enable camelcase */
 
-export default async parentElement => {
+export default async (parentElement) => {
   const { isTeamV1Element } = getTeamElements(parentElement)
   const roomId = getRoomId()
   const match = isTeamV1Element
@@ -62,7 +62,7 @@ export default async parentElement => {
     matchRoomAutoVetoMapsShuffle: shuffleMaps,
     matchRoomAutoVetoMapsShuffleAmount: shuffleMapsAmount
   } = await storage.getAll()
-  let autoVetoItems = matchRoomAutoVetoMapItems.map(m => maps[m] || m)
+  let autoVetoItems = matchRoomAutoVetoMapItems.map((m) => maps[m] || m)
 
   if (shuffleMaps) {
     const shuffledItems = shuffle(autoVetoItems.splice(0, shuffleMapsAmount))
@@ -71,7 +71,7 @@ export default async parentElement => {
 
   autoVetoItems = autoVetoItems.reverse()
 
-  const isVetoMaps = autoVetoItems.some(item =>
+  const isVetoMaps = autoVetoItems.some((item) =>
     select.exists(`div[title="${item}"]`, votingListElement)
   )
 
@@ -91,7 +91,7 @@ export default async parentElement => {
       return
     }
 
-    autoVetoItems.some(item => {
+    autoVetoItems.some((item) => {
       const vetoButtonElement = select(
         `div[title="${item}"] * button`,
         votingListElement

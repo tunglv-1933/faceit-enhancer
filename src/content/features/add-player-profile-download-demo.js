@@ -13,7 +13,7 @@ import { getPlayerProfileNickname } from '../helpers/player-profile'
 
 const FEATURE_ATTRIBUTE = 'demo-download'
 
-export default async parentElement => {
+export default async (parentElement) => {
   const matchHistoryElement = select(
     'div.js-match-history-stats',
     parentElement
@@ -71,7 +71,7 @@ export default async parentElement => {
       <td style={{ width: 1 }}>
         <a
           className="btn btn-default btn--with-icon mb-sm"
-          onClick={async e => {
+          onClick={async (e) => {
             e.stopPropagation()
             const match =
               (await getQuickMatch(matchId)) || (await getMatch(matchId))

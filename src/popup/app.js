@@ -29,9 +29,9 @@ export default class App extends React.Component {
     }))
   }
 
-  onClickUpdateNotification = async versionClicked => {
+  onClickUpdateNotification = async (versionClicked) => {
     const updateNotifications = this.state.options.updateNotifications.filter(
-      updateVersion => updateVersion !== versionClicked
+      (updateVersion) => updateVersion !== versionClicked
     )
 
     await storage.set({ updateNotifications })
@@ -48,7 +48,7 @@ export default class App extends React.Component {
     })
   }
 
-  getUpdateOption = option => newValue => {
+  getUpdateOption = (option) => (newValue) => {
     this.setState(({ options }) => {
       const updatedOption = { [option]: newValue }
       storage.set(updatedOption)
@@ -76,19 +76,19 @@ export default class App extends React.Component {
       key: itemsKey,
       items: getItems ? getItems(options) : options[itemsKey],
       onSorted: onSorted
-        ? newItems =>
+        ? (newItems) =>
             onSorted(newItems, options, this.getUpdateOption(itemsKey))
         : this.getUpdateOption(itemsKey)
     }
   }
 
-  getHandleSwitchOption = option => () => {
+  getHandleSwitchOption = (option) => () => {
     const updateOption = this.getUpdateOption(option)
     const newValue = !this.state.options[option]
     updateOption(newValue)
   }
 
-  getSwitchProps = option => ({
+  getSwitchProps = (option) => ({
     key: option,
     checked: this.state.options[option],
     onClick: this.getHandleSwitchOption(option)

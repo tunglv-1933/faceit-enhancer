@@ -41,7 +41,7 @@ export default async () => {
     return
   }
 
-  matchElements.forEach(matchElement => {
+  matchElements.forEach((matchElement) => {
     const matchId = getRoomId(matchElement.getAttribute('href'))
 
     const resultElement = select(
