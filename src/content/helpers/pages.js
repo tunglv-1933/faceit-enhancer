@@ -10,5 +10,5 @@ export const isPlayerProfileStats = (path) =>
 export const isPlayerProfile = (path) =>
   /players\/.*$/.test(path || getCurrentPath())
 
-export const isTeamsOverview = path =>
+export const isTeamsOverview = (path) =>
   /teams\/.+-.+-.+-.+$/.test(path || getCurrentPath())

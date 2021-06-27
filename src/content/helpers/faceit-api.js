@@ -112,7 +112,7 @@ export const getQuickMatch = (matchId) =>
 export const getMatch = (matchId) =>
   fetchApiMemoized(`/match/v2/match/${matchId}`)
 
-export const getTeam = teamId => fetchApiMemoized(`/core/v1/teams/${teamId}`)
+export const getTeam = (teamId) => fetchApiMemoized(`/core/v1/teams/${teamId}`)
 
 export const getSelf = () => fetchApiMemoized('/core/v1/sessions/me')
 
