@@ -41,13 +41,13 @@ export default ({ getSwitchProps }) => (
       }
       {...getSwitchProps('matchRoomHidePlayerControls')}
     />
-    <ListSubheader divider>Team page</ListSubheader>
+    <ListSubheader divider>Team Page</ListSubheader>
     <ListItemSwitch
-      primary="Detailed Team Information"
-      secondary="Show detailed roster information about team."
+      primary="Show Additional Team Member Information"
+      secondary="Show additional information (country flags, game name, Elo) on team members."
       {...getSwitchProps('teamRosterPlayersInfo')}
     />
-    <ListSubheader divider>Other page elements</ListSubheader>
+    <ListSubheader divider>Other Page Elements</ListSubheader>
     <ListItemSwitch
       primary="Hide FACEIT Client download banner"
       secondary={`Hide the orange banner that says "THE FACEIT CLIENT HAS LANDED, DOWNLOAD IT NOW"`}
