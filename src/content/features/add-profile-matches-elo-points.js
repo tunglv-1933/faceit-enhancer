@@ -12,6 +12,7 @@ import {
   setFeatureAttribute
 } from '../helpers/dom-element'
 import { getIsFreeMember } from '../helpers/membership'
+import createIconElement from '../components/icon'
 
 const FEATURE_ATTRIBUTE = 'elo-points'
 
@@ -86,8 +87,22 @@ export default async parentElement => {
     }
 
     const newEloElement = (
-      <div style={{ color: '#fff', 'font-weight': 'normal' }}>
-        New Elo: {newElo}
+      <div
+        style={{
+          color: '#fff',
+          'font-weight': 'normal',
+          display: 'flex',
+          'align-items': 'center'
+        }}
+      >
+        {createIconElement({
+          icon: 'ELO-icon',
+          style: {
+            'margin-right': 3,
+            'margin-top': 2
+          }
+        })}
+        {newElo}
       </div>
     )
 
