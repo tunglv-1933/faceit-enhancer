@@ -60,7 +60,8 @@ export default async parent => {
         `border-${isFaction1 ? 'left' : 'right'}: 2px solid ${
           playerColors[nickname]
         }`,
-        'border-radius: 0'
+        'border-radius: 0',
+        'padding: 0'
       ])
     })
   })
