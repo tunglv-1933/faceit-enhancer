@@ -1,6 +1,6 @@
 /** @jsx h */
 import { h } from 'dom-chef'
-import vipLevels from '../../shared/vip-levels'
+import vipLevels, { badgeAnimation } from '../../shared/vip-levels'
 
 export default ({ level = 0, role, bgColor, textColor, onClick }) => {
   let description
@@ -19,7 +19,9 @@ export default ({ level = 0, role, bgColor, textColor, onClick }) => {
       break
     }
     default: {
-      description = `Has supported FACEIT Enhancer`
+      description = `Has donated to FACEIT Enhancer${
+        level > 0 ? ` ${level}0\u20AC ` : ' '
+      }to support the development`
     }
   }
 
@@ -37,11 +39,13 @@ export default ({ level = 0, role, bgColor, textColor, onClick }) => {
         textAlign: 'center',
         whiteSpace: 'nowrap',
         verticalAlign: 'baseline',
-        borderRadius: '.25em'
+        borderRadius: '.25em',
+        ...(vipLevels[level].style || {})
       }}
       title={description}
       onClick={onClick}
     >
+      <style>{badgeAnimation}</style>
       FACEIT Enhancer{' '}
       {role || `VIP ${level > 0 ? new Array(level).fill('★').join('') : ''}`}
     </span>
