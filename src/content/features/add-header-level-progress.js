@@ -19,7 +19,7 @@ export default async () => {
     return
   }
 
-  const headerRightElement = select('.main-header__right')
+  const headerRightElement = select('.main-header__right > .flex-center-spaced')
 
   if (!headerRightElement) {
     return
@@ -60,11 +60,11 @@ export default async () => {
         style={{
           display: 'flex',
           'align-items': 'center',
-          'margin-right': 8,
-          'margin-left': 24
+          'margin-left': 4
         }}
       >
-        <div style={{ 'margin-right': 4 }}>
+        {createSkillLevelElement({ level: skillLevel })}
+        <div style={{ 'margin-left': 4 }}>
           <div
             className="text-light"
             style={{
@@ -73,16 +73,10 @@ export default async () => {
             }}
           >
             <div
-              className="text-sm text-muted bold"
-              style={{ 'align-self': 'flex-end' }}
-            >
-              {game.toUpperCase()}
-            </div>
-            <div
               style={{
                 display: 'flex',
                 'align-items': 'center',
-                'justify-content': 'flex-end'
+                'font-size': 12
               }}
             >
               {createIconElement({
@@ -93,6 +87,12 @@ export default async () => {
                 }
               })}
               {faceitElo}
+            </div>
+            <div
+              className="text-sm text-muted bold"
+              style={{ 'align-self': 'flex-end' }}
+            >
+              {game.toUpperCase()}
             </div>
           </div>
           <div>
@@ -127,7 +127,6 @@ export default async () => {
             </div>
           </div>
         </div>
-        {createSkillLevelElement({ level: skillLevel })}
       </div>
     )
 
