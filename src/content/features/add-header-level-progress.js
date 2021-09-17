@@ -1,7 +1,6 @@
 /** @jsx h */
 import select from 'select-dom'
 import { h } from 'dom-chef'
-import elementReady from 'element-ready'
 import { CACHE_TIME, getSelf } from '../helpers/faceit-api'
 import {
   hasFeatureAttribute,
@@ -73,36 +72,12 @@ export default async () => {
               'justify-content': 'space-between'
             }}
           >
-            <a
+            <div
               className="text-sm text-muted bold"
               style={{ 'align-self': 'flex-end' }}
-              onClick={async e => {
-                e.preventDefault()
-                const selectGameElementSelector =
-                  'div[ng-click="vm.openGameSelectorModal()"'
-
-                let selectGameElement = select(selectGameElementSelector)
-
-                if (!selectGameElement) {
-                  const logoElement = select('a[href="/en/home"]')
-
-                  if (!logoElement) {
-                    return
-                  }
-
-                  logoElement.click()
-
-                  selectGameElement = await elementReady(
-                    selectGameElementSelector
-                  )
-                }
-
-                selectGameElement.click()
-              }}
-              href="#"
             >
-              <div>{game.toUpperCase()}</div>
-            </a>
+              {game.toUpperCase()}
+            </div>
             <div
               style={{
                 display: 'flex',
