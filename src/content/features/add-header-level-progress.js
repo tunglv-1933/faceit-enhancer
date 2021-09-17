@@ -10,6 +10,7 @@ import {
 import { LEVELS } from '../helpers/elo'
 import createSkillLevelElement from '../components/skill-level'
 import { isLoggedIn } from '../helpers/user'
+import createIconElement from '../components/icon'
 
 const FEATURE_ATTRIBUTE = 'level-progress'
 const REFRESH_TIME = CACHE_TIME + 15000
@@ -109,11 +110,14 @@ export default async () => {
                 'justify-content': 'flex-end'
               }}
             >
+              {createIconElement({
+                icon: 'ELO-icon',
+                style: {
+                  'margin-right': 3,
+                  'margin-top': 3
+                }
+              })}
               {faceitElo}
-              <i
-                className="icon-ELO-icon text-light"
-                style={{ 'margin-left': 4 }}
-              />
             </div>
           </div>
           <div>

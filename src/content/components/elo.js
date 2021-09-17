@@ -15,14 +15,15 @@ export default ({ elo, className, alignRight = false, style = {} }) => {
       {createIconElement({
         icon: 'ELO-icon',
         style: {
-          [`margin-${alignRight ? 'left' : 'right'}`]: 4,
-          'margin-top': 2
+          [`margin-${alignRight ? 'right' : 'left'}`]: 2,
+          [`margin-${alignRight ? 'left' : 'right'}`]: 2,
+          'margin-top': 1
         }
       })}
     </span>
   )
 
-  eloElement[alignRight ? 'prepend' : 'append'](elo)
+  eloElement[alignRight ? 'append' : 'prepend'](elo)
 
   return eloElement
 }
