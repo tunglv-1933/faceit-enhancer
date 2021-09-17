@@ -2,12 +2,11 @@
 import { h } from 'dom-chef'
 import select from 'select-dom'
 import styleInject from 'style-inject'
-import get from 'lodash/get'
 import {
   hasFeatureAttribute,
   setFeatureAttribute
 } from '../helpers/dom-element'
-import { getQuickMatch, getMatch, getPlayer } from '../helpers/faceit-api'
+import { getMatch, getPlayer } from '../helpers/faceit-api'
 import getMatchHistory from '../helpers/match-history'
 import { getPlayerProfileNickname } from '../helpers/player-profile'
 
@@ -73,11 +72,10 @@ export default async parentElement => {
           className="btn btn-default btn--with-icon mb-sm"
           onClick={async e => {
             e.stopPropagation()
-            const match =
-              (await getQuickMatch(matchId)) || (await getMatch(matchId))
-            const demoUrl =
-              get(match, 'externalMatches[0].stats.demoFileUrl') ||
-              match.demoUrl
+            const match = await getMatch(matchId)
+            // `demoUrLs` is not a typo, it's caused by `camelcaseKeys`.
+            const demoUrl = match.demoUrLs[0]
+
             if (demoUrl) {
               window.open(demoUrl)
             }
