@@ -57,7 +57,7 @@ export default async parent => {
       const nickname = select(nicknameSelector, memberElement).textContent
 
       setStyle(memberElement, [
-        `border-${isFaction1 ? 'left' : 'right'}: 2px solid ${
+        `border-${isFaction1 ? 'left' : 'right'}: 1px solid ${
           playerColors[nickname]
         }`,
         'border-radius: 0',
