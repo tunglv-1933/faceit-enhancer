@@ -35,42 +35,63 @@ export const mapAverageStats = stats =>
         }
       )
     )
-    .reduce(
-      (acc, curr, i) =>
-        Object.keys(curr).reduce((acc2, curr2) => {
-          let value
+    .reduce((acc, curr, i) => {
+      return Object.keys(curr).reduce((acc2, curr2) => {
+        let value
 
-          if (stats.length === i + 1) {
-            if (curr2 === 'winRate') {
-              const results = [...acc[curr2], curr[curr2]]
-              const wins = results.filter(x => x === 'win').length
-              value = Math.round((wins / results.length) * 100)
-            } else {
-              value =
-                (
-                  acc[curr2].reduce(
-                    (acc3, curr3) => acc3 + Number(curr3),
-                    Number(curr[curr2])
-                  ) / stats.length
-                ).toFixed(2) / 1
-
-              if (
-                curr2 === AVERAGE_STATS_MAP.c4 ||
-                curr2 === AVERAGE_STATS_MAP.i6
-              ) {
-                value = Math.round(value)
-              }
-            }
+        if (stats.length === i + 1) {
+          if (curr2 === 'winRate') {
+            const results = [...acc[curr2], curr[curr2]]
+            const wins = results.filter(x => x === 'win').length
+            value = Math.round((wins / results.length) * 100)
           } else {
-            value = (acc[curr2] || []).concat(curr[curr2])
-          }
+            value =
+              (
+                acc[curr2].reduce(
+                  (acc3, curr3) => acc3 + Number(curr3),
+                  Number(curr[curr2])
+                ) / stats.length
+              ).toFixed(2) / 1
 
-          return {
-            ...acc2,
-            [curr2]: value
+            if (
+              curr2 === AVERAGE_STATS_MAP.c4 ||
+              curr2 === AVERAGE_STATS_MAP.i6
+            ) {
+              value = Math.round(value)
+            }
           }
-        }, {}),
-      {}
-    )
+        } else {
+          value = (acc[curr2] || []).concat(curr[curr2])
+        }
+
+        return {
+          ...acc2,
+          [curr2]: value
+        }
+      }, {})
+    }, {})
 
 export const mapAverageStatsMemoized = mem(mapAverageStats)
+
+export const normalizeStats = stats => {
+  const maxRounds = 30
+
+  return stats.map(stats => {
+    const totalRounds = stats.i18
+      .split(' / ')
+      .reduce((total, rounds) => total + Number(rounds), 0)
+
+    if (totalRounds > maxRounds) {
+      const normalizedKills = Math.round(
+        (Number(stats.i6) / totalRounds) * maxRounds
+      )
+
+      return {
+        ...stats,
+        i6: normalizedKills
+      }
+    }
+
+    return stats
+  })
+}

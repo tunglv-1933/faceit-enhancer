@@ -3,7 +3,11 @@ import pRetry from 'p-retry'
 import camelcaseKeys from 'camelcase-keys'
 import format from 'date-fns/format'
 import Cookies from 'js-cookie'
-import { mapTotalStatsMemoized, mapAverageStatsMemoized } from './stats'
+import {
+  mapTotalStatsMemoized,
+  mapAverageStatsMemoized,
+  normalizeStats
+} from './stats'
 
 const BASE_URL = 'https://api.faceit.com'
 export const CACHE_TIME = 600000
@@ -70,35 +74,38 @@ export const getPlayerMatches = (userId, game, size = 20) =>
   )
 
 export const getPlayerStats = async (userId, game, size = 20) => {
+  // Only CS:GO is supported
   if (game !== 'csgo') {
     return false
   }
 
-  let totalStats = await fetchApiMemoized(
+  const gameStats = await fetchApiMemoized(
     `/stats/v1/stats/users/${userId}/games/${game}`
   )
 
-  if (!totalStats || Object.keys(totalStats).length === 0) {
+  if (!gameStats || Object.keys(gameStats).length === 0) {
     return null
   }
 
-  totalStats = mapTotalStatsMemoized(totalStats.lifetime)
+  const totalStats = mapTotalStatsMemoized(gameStats.lifetime)
 
-  let averageStats = await fetchApiMemoized(
+  let matchStats = await fetchApiMemoized(
     `/stats/v1/stats/time/users/${userId}/games/${game}?size=${size}`
   )
 
-  if (!averageStats || !Array.isArray(averageStats)) {
+  if (!Array.isArray(matchStats)) {
     return null
   }
 
-  averageStats = averageStats.filter(stats => stats.gameMode.includes('5v5'))
+  matchStats = matchStats.filter(stats => stats.gameMode.includes('5v5'))
 
-  if (averageStats.length <= 1) {
+  if (matchStats.length <= 1) {
     return null
   }
 
-  averageStats = mapAverageStatsMemoized(averageStats)
+  matchStats = normalizeStats(matchStats)
+
+  const averageStats = mapAverageStatsMemoized(matchStats)
 
   return {
     ...totalStats,
