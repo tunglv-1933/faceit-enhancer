@@ -2,7 +2,7 @@
 import { h } from 'dom-chef'
 
 const stat = (value, label, flex = 1) => (
-  <div style={{ flex, padding: '5px 9px' }}>
+  <div style={{ flex, padding: '4px 8px' }}>
     {value}
     <div className="text-sm">{label}</div>
   </div>
@@ -34,7 +34,7 @@ export default ({
     <div>
       <div
         className="text-sm"
-        style={{ 'border-bottom': '1px solid #333', padding: '5px 9px' }}
+        style={{ 'border-bottom': '1px solid #333', padding: '4px 8px' }}
       >
         Overall
       </div>
@@ -44,7 +44,7 @@ export default ({
     <div style={{ flex: 4 }}>
       <div
         className="text-sm"
-        style={{ 'border-bottom': '1px solid #333', padding: '5px 9px' }}
+        style={{ 'border-bottom': '1px solid #333', padding: '4px 8px' }}
       >
         Last 20 Matches
       </div>
