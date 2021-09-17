@@ -13,7 +13,7 @@ import addMatchRoomPlayerFlags from './features/add-match-room-player-flags'
 import addMatchRoomPlayerElos from './features/add-match-room-player-elos'
 import addMatchRoomPlayerStats from './features/add-match-room-player-stats'
 import addMatchRoomEloEstimation from './features/add-match-room-elo-estimation'
-import addMatchRoomMapEstimations from './features/add-match-room-map-estimations'
+import addMatchRoomMapStats from './features/add-match-room-map-stats'
 import copyMatchRoomCopyServerData from './features/copy-match-room-copy-server-data'
 import clickMatchRoomConnectToServer from './features/click-match-room-connect-to-server'
 import addHeaderLevelProgress from './features/add-header-level-progress'
@@ -129,7 +129,7 @@ function observeBody() {
         )
         runFeatureIf(
           'matchRoomShowMapStats',
-          addMatchRoomMapEstimations,
+          addMatchRoomMapStats,
           mainContentElement
         )
         runFeatureIf(

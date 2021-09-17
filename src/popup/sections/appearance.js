@@ -26,12 +26,12 @@ export default ({ getSwitchProps }) => (
     />
     <ListItemSwitch
       primary="Show Player Stats"
-      secondary="Show total stats (Matches, Win Rate) & average stats (Kills, Headshots %, K/D, K/R) from last 20 games."
+      secondary="Show total stats (Matches, Win Rate) & average stats (Kills, Headshots %, K/D, K/R) from last 20 matches."
       {...getSwitchProps('matchRoomShowPlayerStats')}
     />
     <ListItemSwitch
       primary="Show Map Stats"
-      secondary="Show map stats (Games Played, Win Rate) from last 20 games."
+      secondary="Show total map stats (Matches, Win Rate) from last 20 matches of both teams for each map."
       {...getSwitchProps('matchRoomShowMapStats')}
     />
     <ListItemSwitch

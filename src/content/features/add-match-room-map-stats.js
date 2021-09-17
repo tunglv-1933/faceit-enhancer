@@ -100,9 +100,10 @@ export default async parentElement => {
       >
         <div
           style={{ padding: '5px 9px', flex: '1 1 45%', cursor: 'help' }}
-          title="Games played / Win rate in last 20 matches"
+          title="Total matches played / win rate from last 20 matches of all players"
         >
-          {rosters[0].gamesPlayed} Games / {rosters[0].winRate}% Win
+          {rosters[0].gamesPlayed} <span className="text-sm">Matches</span> /{' '}
+          {rosters[0].winRate}% <span className="text-sm">WR</span>
         </div>
         <div
           style={{
@@ -113,7 +114,7 @@ export default async parentElement => {
             textAlign: 'center'
           }}
         >
-          VS
+          vs.
         </div>
         <div
           style={{
@@ -122,9 +123,10 @@ export default async parentElement => {
             textAlign: 'right',
             cursor: 'help'
           }}
-          title="Games played / Win rate in last 20 matches"
+          title="Total matches played / win rate from last 20 matches of all players"
         >
-          {rosters[1].gamesPlayed} Games / {rosters[1].winRate}% Win
+          {rosters[1].gamesPlayed} <span className="text-sm">Matches</span> /{' '}
+          {rosters[1].winRate}% <span className="text-sm">WR</span>
         </div>
       </div>
     )
