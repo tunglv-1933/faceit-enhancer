@@ -1,10 +1,6 @@
 import select from 'select-dom'
-import {
-  getMatchState,
-  getRoomId,
-  getTeamElements
-} from '../helpers/match-room'
-import { getSelf, getQuickMatch, getMatch } from '../helpers/faceit-api'
+import { getMatchState, getRoomId } from '../helpers/match-room'
+import { getSelf, getMatch } from '../helpers/faceit-api'
 import {
   setStyle,
   hasFeatureAttribute,
@@ -20,11 +16,8 @@ export default async parent => {
     return
   }
 
-  const { isTeamV1Element } = getTeamElements(parent)
   const roomId = getRoomId()
-  const { teams } = isTeamV1Element
-    ? await getQuickMatch(roomId)
-    : await getMatch(roomId)
+  const { teams } = await getMatch(roomId)
 
   const self = await getSelf()
   const isSelfInMatch = [
@@ -37,23 +30,31 @@ export default async parent => {
   }
 
   const balanceIndicatorElement = select('.match__team-balance', parent)
+
   if (
     balanceIndicatorElement &&
-    hasFeatureAttribute(FEATURE_ATTRIBUTE, balanceIndicatorElement)
+    !hasFeatureAttribute(FEATURE_ATTRIBUTE, balanceIndicatorElement)
   ) {
-    return
+    setFeatureAttribute(FEATURE_ATTRIBUTE, balanceIndicatorElement)
+    setStyle(balanceIndicatorElement, 'opacity: 0')
   }
-  setFeatureAttribute(FEATURE_ATTRIBUTE, balanceIndicatorElement)
-  setStyle(balanceIndicatorElement, 'opacity: 0')
+
+  const toggleChatElement = select('div[ng-click="vm.toggleSidebar()"]', parent)
+
+  if (
+    toggleChatElement &&
+    !hasFeatureAttribute(FEATURE_ATTRIBUTE, toggleChatElement)
+  ) {
+    setFeatureAttribute(FEATURE_ATTRIBUTE, toggleChatElement)
+    toggleChatElement.click()
+  }
 
   const teamElements = select.all('match-team-v2', parent)
 
   teamElements.forEach(teamElement => {
-    if (hasFeatureAttribute(FEATURE_ATTRIBUTE, teamElement)) {
-      return
+    if (!hasFeatureAttribute(FEATURE_ATTRIBUTE, teamElement)) {
+      setFeatureAttribute(FEATURE_ATTRIBUTE, teamElement)
+      setStyle(teamElement, 'opacity: 0')
     }
-    setFeatureAttribute(FEATURE_ATTRIBUTE, teamElement)
-
-    setStyle(teamElement, 'opacity: 0')
   })
 }
