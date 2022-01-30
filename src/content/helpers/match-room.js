@@ -15,15 +15,21 @@ export const getRoomId = path => {
   return match && match[1]
 }
 
-export const MATCH_TEAM_V1 = 'match-team'
-export const MATCH_TEAM_V2 = 'match-team-v2'
+export const MATCH_TEAM_V1 = '.dTvQIB'
+export const MATCH_TEAM_V2 = '.bDSrsi'
 export const MEMBERS_ATTRIBUTE = '[members]:not([members=""])'
+// Export const MATCHROOM_OVERVIEW = '#MATCHROOM-OVERVIEW'
 
 export const matchRoomIsReady = () =>
-  select.exists(`${MATCH_TEAM_V1}${MEMBERS_ATTRIBUTE}`) ||
-  select.exists(`${MATCH_TEAM_V2}${MEMBERS_ATTRIBUTE}`)
+  document
+    .querySelector('#parasite-container')
+    .shadowRoot.querySelector('div[name="roster1"]') !== null ||
+  document
+    .querySelector('#parasite-container')
+    .shadowRoot.querySelector('div[name="roster2"]') !== null
 
 export const getTeamElements = parent => {
+  parent = document.querySelector('#parasite-container').shadowRoot
   let teamElements = select.all(MATCH_TEAM_V1, parent)
   let isTeamV1Element = true
 
